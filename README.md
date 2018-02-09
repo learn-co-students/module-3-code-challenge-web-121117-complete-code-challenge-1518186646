@@ -123,9 +123,9 @@ To test your code you should be able to refresh the page and see the number of l
 
 ## Step 4 - Comment Feature (Frontend)
 
-The next feature to approach is the functionality to add comments to a picture. First get this working in the browser only without worrying about persistence.
+<!-- The next feature to approach is the functionality to add comments to a picture. First get this working in the browser only without worrying about persistence.
 
-Filling out the input and clicking 'Submit' should append your new comment as an `<li>` to the comments unordered list element. You should also clear out the comment input, so it's an empty field for the next comment to be added.
+Filling out the input and clicking 'Submit' should append your new comment as an `<li>` to the comments unordered list element. You should also clear out the comment input, so it's an empty field for the next comment to be added. -->
 
 ## Step 5 - Comment Feature (Backend)
 

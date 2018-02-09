@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       //create comments
       const comments = image.comments.map(function(comment) {
-        commentObj = new Comment(comment);
+        let commentObj = new Comment(comment);
         const commentsUL = document.getElementById("comments");
         let commentLi = document.createElement("li");
         commentLi.dataset.id = commentObj.id;
@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let likeSpan = document.getElementById("likes");
         likeSpan.innerHTML = "";
         likeSpan.append(numLikes);
+
         //update backend likes
         let postData = { image_id: image.id };
         fetch(`https://randopic.herokuapp.com/likes/`, {
@@ -54,6 +55,18 @@ document.addEventListener("DOMContentLoaded", function() {
           },
           body: JSON.stringify(postData)
         });
+      });
+
+      const CommentForm = document.getElementById("comment_form");
+      CommentForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        commentInput = document.getElementById("comment_input").value;
+        const commentsUL = document.getElementById("comments");
+        let commentLi = document.createElement("li");
+        let commentText = document.createTextNode(commentInput);
+        commentLi.append(commentText);
+        commentsUL.append(commentLi);
+        document.getElementById("comment_input").value = "";
       });
     });
 });
