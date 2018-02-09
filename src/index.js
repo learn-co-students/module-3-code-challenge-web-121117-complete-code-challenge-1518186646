@@ -1,4 +1,4 @@
-const imageId = 3 //Enter your assigned imageId here
+const imageId = 3
 const imageURL = `https://randopic.herokuapp.com/images/${imageId}`
 const likeURL = `https://randopic.herokuapp.com/likes/`
 const commentsURL = `https://randopic.herokuapp.com/comments/`
@@ -13,8 +13,12 @@ function renderComments(json){
   let comments = document.getElementById('comments')
   for (comment of json){
     let listComment = document.createElement('li')
-    listComment.id = comment.id
-    listComment.innerHTML = comment.content
+    listComment.id = `comment-${comment.id}`
+    listComment.innerHTML = `
+    ${comment.content}
+    <small>
+    <button data-id='${comment.id}' onclick='deleteComment(this)'>Delete</button>
+    </small>`
     comments.prepend(listComment)
   }
 }
@@ -53,19 +57,37 @@ function addComment(e){
   let newComment = document.getElementById('comment_input').value
   let comments = document.getElementById('comments')
   let listComment = document.createElement('li')
-  listComment.innerHTML = newComment
-  comments.append(listComment)
-  postComment(newComment)
+
+  //I was told I could make the comment posting pessemistic for the bonus, as long as everything still worked.
+
+  postComment(newComment).then(json => {
+    listComment.id = `comment-${json.id}`
+    listComment.innerHTML = `${json.content}
+    <small>
+    <button data-id='${json.id}'onclick='deleteComment(this)'>Delete</button>
+    </small>`
+    comments.append(listComment)
+  })
   document.getElementById('comment_input').value = ''
 }
 
 function postComment(comment){
-  fetch('https://randopic.herokuapp.com/comments/', {
+  return fetch('https://randopic.herokuapp.com/comments/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({image_id: imageId, content: comment})
-  }).then(res => console.log(res))
+  }).then(res => res.json())
+}
+
+function deleteComment(comment){
+  commentId = comment.dataset.id
+  return fetch(`https://randopic.herokuapp.com/comments/${commentId}`, {
+    method: 'DELETE'
+  }).then(res => res.json()).then(json => {
+    alert(json.message)
+    document.getElementById(`comment-${commentId}`).remove()
+  })
 }
