@@ -4,7 +4,9 @@ const likeURL = `https://randopic.herokuapp.com/likes/`
 const commentsURL = `https://randopic.herokuapp.com/comments/`
 
 document.addEventListener('DOMContentLoaded', function() {
-  fetchImage(imageURL)
+  let randomImageId = Math.floor(Math.random() * 50)
+  let randomURL = `https://randopic.herokuapp.com/images/${randomImageId}`
+  fetchImage(imageURL) // if you want the REAL RandoPic, switch this to randomURL
   document.getElementById('like_button').addEventListener('click', addLike)
   document.getElementById('comment_form').addEventListener('submit', addComment)
 })
@@ -78,7 +80,7 @@ function postComment(comment){
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({image_id: imageId, content: comment})
+    body: JSON.stringify({image_id: imageId, content: comment})) // to comment on RandoPics, switch this from the comment
   }).then(res => res.json())
 }
 
