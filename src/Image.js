@@ -1,4 +1,3 @@
-class Image {
-  
-
-}
+const Image = (function() {
+  return class Image {};
+})();
