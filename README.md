@@ -14,13 +14,13 @@ Today we're building RandoPic, an app for viewing a random picture. There is a b
 
 A RandoPic user will be able to do the following things:
 
-  - As a user, when the page loads I will see an image, any comments that image has, and the number of likes that image has.
+  - As a user, when the page loads I will see an image, any comments that image has, and the number of likes that image has. [done]
 
-  - As a user, I can click to like an image, which will increase the number of likes that image has by one.
+  - As a user, I can click to like an image, which will increase the number of likes that image has by one. [done]
 
-  - As a user I can fill out an input fields and submit the form to add a comment to an image. I should see my new comment below any previous comments.
+  - As a user I can fill out an input fields and submit the form to add a comment to an image. I should see my new comment below any previous comments. [done]
 
-  - As a user, when I refresh the page, any comments or likes I have added should be persisted to the backend API and I should see my changes on the page.
+  - As a user, when I refresh the page, any comments or likes I have added should be persisted to the backend API and I should see my changes on the page. [done]
 
 ## Functionality demo
   [Example](./animated_challenge_example.gif "Example Functionality")
