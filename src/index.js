@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
           body: JSON.stringify(postData)
         });
       });
-
+      //optimistically render comment
       const CommentForm = document.getElementById("comment_form");
       CommentForm.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -68,5 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         commentsUL.append(commentLi);
         document.getElementById("comment_input").value = "";
       });
+      //comment to backend
+      //out of time
     });
 });
