@@ -6,18 +6,33 @@ class Image {
   }
 
   static postImage() {
-    let picture = document.getElementById("image");
-    let name = document.getElementById("name");
     ImageAdapter.getImage(2).then(json => {
-      picture.src = json.url;
+      let image = document.getElementById("image");
+      image.src = json.url;
+
+      let name = document.getElementById("name");
       name.innerHTML = json.name;
+
       let likes = document.getElementById("likes");
-      likes = json.like_count;
+      likes.innerHTML = json.like_count;
+
+      let comments = document.getElementById("comments");
+      json.comments.forEach(comment => {
+        let li = document.createElement("li");
+        li.innerText = comment.content;
+        let button = document.createElement("button");
+        button.innerHTML = "Delete";
+        li.append(button);
+        li.id = comment.id;
+
+        comments.append(li);
+      });
     });
   }
+
   static addLike() {
     let likes = document.getElementById("likes");
     likes.innerHTML = parseInt(likes.innerHTML) + 1;
-    ImageAdapter.addLike(2, likes);
+    ImageAdapter.addLikes(2);
   }
 }
